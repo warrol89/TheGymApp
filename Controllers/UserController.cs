@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TheGymApp.Model;
 using TheGymApp.Service;
@@ -17,16 +14,11 @@ namespace TheGymApp.Controllers
     {
         private readonly IZsysUserService _zsysUserService;
         public UserController(IZsysUserService zsysUserService)
-        
-{
+
+        {
             _zsysUserService = zsysUserService;
         }
-        // GET: api/<controller>
-        //[HttpGet]
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "value1", "value2" };
-        //}
+        
 
         [Route("/addnew")]
         [HttpPost]
@@ -57,12 +49,10 @@ namespace TheGymApp.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            _zsysUserService.CreateNewMember(new ZSysUserDTO { DOB = memberModel.DateOfBirth, Email = memberModel.EmailAddress, Notes = memberModel.Notes });
 
             return Ok();
         }
-
-
 
     }
 }

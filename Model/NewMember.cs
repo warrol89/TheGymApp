@@ -18,6 +18,7 @@ namespace TheGymApp.Model
         public DateTime DateOfAppointment { get; set; }
         [DataType(DataType.DateTime, ErrorMessage = "DOB Invalid type")]
         public DateTime DateOfBirth { get; set; }
+        public string Notes { get; set; }
 
     }
 }

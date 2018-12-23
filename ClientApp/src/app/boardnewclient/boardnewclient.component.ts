@@ -3,6 +3,7 @@ import { Form, FormGroup, FormControl, ReactiveFormsModule } from '@angular/form
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { useAnimation } from '@angular/animations';
 import { Http } from '@angular/http';
+import { EnvironmentDetails } from 'src/environments/environment';
 
 @Component({
   selector: 'app-boardnewclient',
@@ -12,8 +13,8 @@ import { Http } from '@angular/http';
 export class BoardnewclientComponent implements OnInit {
 
   userForm = new FormGroup({
-    memberName: new FormControl('test'),
-    phoneNumber: new FormControl('test'),
+    memberName: new FormControl(''),
+    phoneNumber: new FormControl(''),
     emailAddress: new FormControl(''),
     DOB: new FormControl(''),
     appointmentDate: new FormControl(''),
@@ -24,8 +25,9 @@ export class BoardnewclientComponent implements OnInit {
     headers: new HttpHeaders({
       'ContentType': 'application/json'
     })
-  }
-  constructor(private _http: HttpClient) { }
+  };
+
+  constructor(private _http: HttpClient, private _environment: EnvironmentDetails) { }
 
   ngOnInit() {
   }
@@ -33,9 +35,7 @@ export class BoardnewclientComponent implements OnInit {
   addNewMember() {
 
     console.log(this.userForm.value);
-    this._http.post('https://localhost:44371/api/user/', this.userForm.value, this.httpOtions).subscribe(
-      
-      
+    this._http.post(this._environment.baseUrl, this.userForm.value, this.httpOtions).subscribe(
     );
 
 
