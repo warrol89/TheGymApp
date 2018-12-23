@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TheGymApp.Model;
 using TheGymApp.Service;
 using TheGymApp.Service.Models;
 
@@ -41,7 +42,7 @@ namespace TheGymApp.Controllers
         
         [HttpGet]
         public async Task<IActionResult> Get()
-        { 
+         { 
             var details = await _zsysUserService.GetMemberDetails(1);
             if (details != null)
             return Ok(details);
@@ -49,6 +50,19 @@ namespace TheGymApp.Controllers
             return NoContent();            
         }
 
-        
+        [HttpPost]
+        public IActionResult Post([FromBody] NewMember memberModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+
+            return Ok();
+        }
+
+
+
     }
 }
